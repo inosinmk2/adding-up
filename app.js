@@ -34,5 +34,11 @@ rl.on('close', () => {
   for (const [key, value] of prefectureDataMap) {
     value.change = value.after / value.before;
   }
-  console.log(prefectureDataMap);
+  const rankingArray = Array.from(prefectureDataMap).sort((pair1, pair2) => {
+    return pair2[1].change - pair1[1].change;
+  });
+  const rankingStrings = rankingArray.map(([key, value]) => {
+    return `${key}: ${ value.before }=>${ value.after } 変化率: ${ value.change } `;
+  });
+  console.log(rankingStrings);
 });
